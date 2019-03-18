@@ -2,7 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
+const Config = require('./app/config/Config');
+
 const app = express();
+const prefix = '/';
+const env = Config.getEnv();
 
 /*
   Morgan is used to log requests
@@ -15,14 +19,11 @@ app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
-const prefix = '/';
-
-
 app.use(prefix, (req, res) => {
   res.json({message: 'Hello World !'});
 });
 
-const server = app.listen(3000, '127.0.0.1', () => {
+const server = app.listen(env.server.port, env.server.host, () => {
   console.log('server: http://%s:%s', server.address().address, server.address().port);
 });
 
