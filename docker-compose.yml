@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo:4.1
+    ports:
+      - 27017:27017
+    volumes:
+      - "./database/data:/data/db"
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mongo
+    links:
+      - mongo
