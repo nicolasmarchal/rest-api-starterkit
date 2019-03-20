@@ -5,7 +5,7 @@
 
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as morgan from 'morgan'
+import * as morgan from 'morgan';
 
 export default class App {
     public app: express.Application;
